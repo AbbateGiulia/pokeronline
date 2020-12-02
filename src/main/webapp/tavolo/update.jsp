@@ -56,7 +56,7 @@
   				
   			<div class="form-group">        
 		      <div class="col-sm-offset-2 col-sm-10">
-		        <button type="submit" class="btn btn-primary btn-md">Effetua Inserimento</button>
+		        <button type="submit" class="btn btn-primary btn-md">Effetua Aggiornamento</button>
 		      </div>
 		    </div>
 		</form>

@@ -45,7 +45,7 @@ public class Utente {
 	private String cognome;
 	
 	@Column(name = "data_registrazione")
-	private LocalDate dataRegistrazione =  LocalDate.now();
+	private LocalDate dataRegistrazione;
 	
 	@Column(name= "esperienza_accumulata")
 	private Integer esperienzaAccumulata = 0;
@@ -59,7 +59,7 @@ public class Utente {
 	
 	// se non uso questa annotation viene gestito come un intero
 		@Enumerated(EnumType.STRING)
-		private StatoUtente stato = StatoUtente.CREATO;
+		private StatoUtente stato;
 		
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "utente_ruolo", joinColumns = @JoinColumn(name = "utente_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ruolo_id", referencedColumnName = "ID"))

@@ -1,8 +1,7 @@
-package it.solving.pokeronline.web.tavolo;
+package it.solving.pokeronline.web.utente;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,20 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import it.solving.pokeronline.model.Tavolo;
-import it.solving.pokeronline.service.tavolo.TavoloService;
-import it.solving.pokeronline.util.Util;
+import it.solving.pokeronline.model.StatoUtente;
+import it.solving.pokeronline.service.ruolo.RuoloService;
 
 /**
- * Servlet implementation class PrepareUpdateTavoloServlet
+ * Servlet implementation class PrepareSearchUtenteServlet
  */
-@WebServlet("/special/PrepareUpdateTavoloServlet")
-public class PrepareUpdateTavoloServlet extends HttpServlet {
+@WebServlet("/users/PrepareSearchUtenteServlet")
+public class PrepareSearchUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
-	private TavoloService tavoloService;
-	
+	private RuoloService ruoloService;
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -36,7 +34,7 @@ public class PrepareUpdateTavoloServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PrepareUpdateTavoloServlet() {
+    public PrepareSearchUtenteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,20 +43,11 @@ public class PrepareUpdateTavoloServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idTavolo = request.getParameter("idTavolo");
 		
-		if(Util.isEmptyOrNull(idTavolo)|| !Util.isNumber(idTavolo)) {
-			RequestDispatcher rd = request.getRequestDispatcher("/LogoutServlet");
-			rd.forward(request, response);
-			return;
-		}
-		Tavolo tavoloDettaglio = tavoloService.
-			caricaSingoloTavolo(Long.parseLong(idTavolo));
-		
-		request.setAttribute("tavoloAttribute", tavoloDettaglio);
-		request.getRequestDispatcher("/tavolo/update.jsp").forward(request, response);
+		request.setAttribute("listaStati", StatoUtente.allStato);
+		request.setAttribute("listaRuoli", ruoloService.listAllRuolo() );
+		request.getRequestDispatcher("/utente/search.jsp").forward(request, response);
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

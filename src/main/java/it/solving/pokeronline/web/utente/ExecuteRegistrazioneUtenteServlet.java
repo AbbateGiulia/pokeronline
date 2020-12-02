@@ -1,6 +1,7 @@
 package it.solving.pokeronline.web.utente;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -15,6 +16,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 
 import it.solving.pokeronline.dto.UtenteDTO;
+import it.solving.pokeronline.model.StatoUtente;
 import it.solving.pokeronline.model.Utente;
 import it.solving.pokeronline.service.utente.UtenteService;
 
@@ -75,6 +77,8 @@ public class ExecuteRegistrazioneUtenteServlet extends HttpServlet {
 		
 		//se arrivo qui significa che va bene ma controllo municipio
 				Utente utenteInstance = UtenteDTO.buildModelFromDto(utenteDTO);
+				utenteInstance.setStato(StatoUtente.CREATO);
+				utenteInstance.setDataRegistrazione(LocalDate.now());
 				
 				utenteService.inserisciNuovo(utenteInstance);
 				

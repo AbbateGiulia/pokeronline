@@ -55,14 +55,14 @@ public class CheckAuthFilter implements Filter {
 			}
 			//controllo che utente abbia ruolo admin se nel path risulta presente /admin/
 			if(isPathForOnlyAdministrators(pathAttuale) && !utenteInSession.isAdmin()) {
-				httpRequest.setAttribute("messaggio", "Non si è autorizzati alla navigazione richiesta");
+				httpRequest.setAttribute("errorMessage", "Non si è autorizzati alla navigazione richiesta");
 				httpRequest.getRequestDispatcher("/home.jsp").forward(httpRequest, httpResponse);
 				return;
 			}
 			
 			//controllo che utente abbia ruolo special se nel path risulta presente /special/
 			if(isPathForOnlySpecial(pathAttuale) && !utenteInSession.isSpecial() && !utenteInSession.isAdmin()) {
-				httpRequest.setAttribute("messaggio", "Non si è autorizzati alla navigazione richiesta");
+				httpRequest.setAttribute("errorMessage", "Non si è autorizzati alla navigazione richiesta");
 				httpRequest.getRequestDispatcher("/home.jsp").forward(httpRequest, httpResponse);
 				return;
 			}

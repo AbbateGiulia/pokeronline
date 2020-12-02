@@ -8,7 +8,7 @@
  <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Home Page</title>
+	<title>Gioco</title>
 	
 	 <style type="text/css">
     	body {
@@ -20,7 +20,7 @@
 </head>
 <body>
 
-	<%@ include file="header.jsp"%>
+	<%@ include file="../header.jsp"%>
 
  	<div class="container">
  	
@@ -29,29 +29,29 @@
 			</div>
 
  		<div class="row justify-content-center">
- 		<c:if test="${sessionScope.userInfo.isAdmin() || sessionScope.userInfo.isSpecial()}">
  			<div class="col-sm-6 text-center">
 				<div class="jumbotron jumbotron-fluid">
-					 <h1 class="display-8">Gestione Tavolo</h1>
-				       <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/special/PrepareSearchTavoloServlet" role="button">Vai alla Gestione &raquo;</a></p>
+					 <h1 class="display-8">Compra Credito</h1>
+				       <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/PrepareShopCreditoServlet" role="button">  Shop &raquo;</a> </p>
 		        	  
 			     </div>
 		    </div>
-		 </c:if>
+		
 		   
-		  
+		  <c:if test="${sessionScope.userInfo.tavolo == null}">
 	      <div class="col-sm-6 text-center">
 		    <div class="jumbotron jumbotron-fluid">			
-			        <h1 class="display-8">Play Management</h1>
-			        <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/PrepareFunzioniTavoloServlet" role="button">Vai al Gioco &raquo;</a></p> 
+			        <h1 class="display-8">Cerca tavolo</h1>
+			        <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/PrepareSeacrhPartitaServlet" role="button">Search &raquo;</a></p> 
 		    </div>
     	  </div>
+    </c:if>
     
-		<c:if test="${sessionScope.userInfo.isAdmin()}">
+		<c:if test="${sessionScope.userInfo.tavolo != null}">
 	     <div class="col-sm-6 text-center">
 	    	<div class="jumbotron jumbotron-fluid">	    		
-			        <h1 class="display-8">Gestione Amministrazione</h1>
-			        <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/users/PrepareSearchUtenteServlet" role="button">Vai alla Gestione &raquo;</a></p>	     		      
+			        <h1 class="display-8">Go to last game</h1>
+			        <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/users/PrepareSearchUtenteServlet" role="button">Torna al gioco &raquo;</a></p>	     		      
 	    	</div>
 	     </div>
     </c:if>
@@ -62,7 +62,7 @@
 
 
 
-	 <%@ include file="footer.jsp" %>
+	 <%@ include file="../footer.jsp" %>
 
 
 </body>

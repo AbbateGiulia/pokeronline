@@ -12,7 +12,7 @@ public interface TavoloRepository extends CrudRepository<Tavolo, Long>,QueryByEx
 
 	 List <Tavolo> findAllTavoloByUtenteCreatore_id(Long id);
 	 
-	// per caricare municipio
+	// per caricare tavolo
 			@Query("from Tavolo t left join fetch t.giocatori g where t.id =?1")
 			Tavolo getTavoloEager(Long id);
 }

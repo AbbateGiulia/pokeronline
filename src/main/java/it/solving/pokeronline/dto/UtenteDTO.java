@@ -1,11 +1,16 @@
 package it.solving.pokeronline.dto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import it.solving.pokeronline.model.StatoUtente;
 import it.solving.pokeronline.model.Utente;
+import it.solving.pokeronline.util.Util;
 
 public class UtenteDTO {
 	
@@ -26,6 +31,12 @@ public class UtenteDTO {
 		private String creditoAccumulato ;
 		
 		private String idTavolo;
+		
+		private String ruolo;
+		
+		private String stato;
+		
+		private String[] ruoli;
 
 		public UtenteDTO(String username, String password, String nome, String cognome) {
 			super();
@@ -38,6 +49,16 @@ public class UtenteDTO {
 		public UtenteDTO() {
 			super();
 		}
+		
+		
+
+		public String[] getRuoli() {
+			return ruoli;
+		}
+
+		public void setRuoli(String[] ruoli) {
+			this.ruoli = ruoli;
+		}
 
 		public Long getId() {
 			return id;
@@ -45,6 +66,23 @@ public class UtenteDTO {
 
 		public void setId(Long id) {
 			this.id = id;
+		}
+		
+
+		public String getRuolo() {
+			return ruolo;
+		}
+
+		public void setRuolo(String ruolo) {
+			this.ruolo = ruolo;
+		}
+
+		public String getStato() {
+			return stato;
+		}
+
+		public void setStato(String stato) {
+			this.stato = stato;
 		}
 
 		public String getUsername() {
@@ -117,7 +155,7 @@ public class UtenteDTO {
 			if(StringUtils.isBlank(this.nome))
 				result.add("Il campo nome non può essere vuoto");
 			if(StringUtils.isBlank(this.cognome))
-				result.add("Il campo codice non può essere vuoto");
+				result.add("Il campo cognome non può essere vuoto");
 			if(StringUtils.isBlank(this.username))
 				result.add("Il campo username non può essere vuoto");
 			if(StringUtils.isBlank(this.password))
@@ -126,12 +164,54 @@ public class UtenteDTO {
 			return result;
 		}
 		
+		public List<String> errorsSearch(){
+			List<String> result = new ArrayList<String>();
+			
+			if (!Util.isEmptyOrNull(this.dataRegistrazione)) {
+				try {
+					Date dataParse = new SimpleDateFormat("dd-mm-yyyy").parse(getDataRegistrazione());
+				} catch (ParseException e) {
+					result.add("data non valida");
+				}
+			}
+			return result;
+		}
+		
+		public List<String> errorsUpdate(){
+			List<String> result = new ArrayList<String>();
+			if(StringUtils.isBlank(this.nome))
+				result.add("Il campo nome non può essere vuoto");
+			if(StringUtils.isBlank(this.cognome))
+				result.add("Il campo cognome non può essere vuoto");
+			if(StringUtils.isBlank(this.username))
+				result.add("Il campo username non può essere vuoto");
+			if(this.ruoli == null) {
+				result.add("Il campo ruolo non può essere vuoto");
+			}
+			
+			return result;
+		}
+		
+		
+		
+		
 		public static Utente buildModelFromDto(UtenteDTO utenteDTO) {
 			Utente result = new Utente();
+			if ((utenteDTO.getId())!= null) {
+				result.setId(utenteDTO.getId());
+				}
+			if (!Util.isEmptyOrNull(utenteDTO.getNome())) {
 			result.setNome(utenteDTO.getNome());
+			}
+			if (!Util.isEmptyOrNull(utenteDTO.getCognome())) {
 			result.setCognome(utenteDTO.getCognome());
+			}
+			if (!Util.isEmptyOrNull(utenteDTO.getUsername())) {
 			result.setUsername(utenteDTO.getUsername());
-			result.setPassword(utenteDTO.getPassword());
+			}
+			if (!Util.isEmptyOrNull(utenteDTO.getStato())) {
+				result.setStato(Enum.valueOf(StatoUtente.class, utenteDTO.getStato()));
+				}
 			return result;
 		}
 
