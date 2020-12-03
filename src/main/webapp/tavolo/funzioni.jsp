@@ -36,7 +36,7 @@
  			<div class="col-sm-6 text-center">
 				<div class="jumbotron jumbotron-fluid">
 					 <h1 class="display-8">Compra Credito</h1>
-				       <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/PrepareShopCreditoServlet" role="button">  Shop &raquo;</a> </p>
+				       <p><a class="btn btn-success btn-lg" href="${pageContext.request.contextPath}/PrepareShopCreditoServlet" role="button">  Shop &raquo;</a> </p>
 		        	  
 			     </div>
 		    </div>
@@ -46,7 +46,7 @@
 	      <div class="col-sm-6 text-center">
 		    <div class="jumbotron jumbotron-fluid">			
 			        <h1 class="display-8">Cerca tavolo</h1>
-			        <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/PrepareSearchPartitaServlet" role="button">Search &raquo;</a></p> 
+			        <p><a class="btn btn-success btn-lg" href="${pageContext.request.contextPath}/PrepareSearchPartitaServlet" role="button">Search &raquo;</a></p> 
 		    </div>
     	  </div>
     </c:if>
@@ -55,7 +55,7 @@
 	     <div class="col-sm-6 text-center">
 	    	<div class="jumbotron jumbotron-fluid">	    		
 			        <h1 class="display-8">Go to last game</h1>
-			        <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/GoToLastGameServlet" role="button">Torna al gioco &raquo;</a></p>	     		      
+			        <p><a class="btn btn-success btn-lg" href="${pageContext.request.contextPath}/GoToLastGameServlet" role="button">Torna al gioco &raquo;</a></p>	     		      
 	    	</div>
 	     </div>
     </c:if>

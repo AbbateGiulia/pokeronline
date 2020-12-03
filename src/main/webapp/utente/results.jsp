@@ -49,13 +49,13 @@
 						<td>
 							<a
 							href="${pageContext.request.contextPath}/users/ExecuteVisualizzaUtenteServlet?idUtente=${utenteItem.id }"
-							class="btn btn-info">Dettaglio</a> 
+							class="btn btn-outline-success">Dettaglio</a> 
 							<a
 							href="${pageContext.request.contextPath}/users/PrepareUpdateUtenteServlet?idUtente=${utenteItem.id }"
-							class="btn btn-info">Modifica</a>
+							class="btn btn-outline-success">Modifica</a>
 							 <a
 							href="${pageContext.request.contextPath}/users/ExecuteModificaStatoServlet?idUtente=${utenteItem.id }"
-							class="btn btn-info"> 
+							class="btn btn-outline-success"> 
 							<c:if test="${utenteItem.stato == 'DISABILITATO' || utenteItem.stato == 'CREATO' }">Abilita</c:if>
 							<c:if test="${utenteItem.stato == 'ATTIVO' }">Disabilita</c:if>
 							</a>
@@ -68,5 +68,7 @@
 			</table>
 
 	</div>
+	
+	<%@ include file="../footer.jsp" %>
 </body>
 </html>

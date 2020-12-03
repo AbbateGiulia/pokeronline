@@ -4,6 +4,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+ <style type="text/css">
+			.error {
+			  color: #a94442;
+			  background-color: #f2dede;
+			  border-color: #ebccd1;
+			  padding:1px 20px 1px 20px;
+			}
+	</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Update</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon" />
@@ -31,7 +39,7 @@
 	
 	<c:set var= "utente" value="${requestScope.utenteAttribute}"/>
 	   
-      	<form class="form-horizontal" action="${pageContext.request.contextPath}/users/ExecuteUpdateUtenteServlet" method="post">
+      	<form class="form-horizontal" action="${pageContext.request.contextPath}/users/ExecuteUpdateUtenteServlet" method="post" id="form">
       	
       	<input class="form-control" type="hidden" id="utenteId" name="utenteId" value="${utente.id}" >
       	
@@ -78,14 +86,45 @@
   				
   			<div class="form-group">        
 		      <div class="col-sm-offset-2 col-sm-10">
-		        <button type="submit" class="btn btn-primary btn-md">Effetua Aggiornamento</button>
+		        <button type="submit" class="btn btn-success btn-md">Effetua Aggiornamento</button>
 		      </div>
 		    </div>
+		    
+		    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+			<script>
+			$(document).ready(function () {
+
+				$("#form").validate({
+				    rules: {
+				        nome: {				            
+				            required: true
+				        },
+				        cognome: {					        	
+				            required: true
+				        },
+				        username: {   
+				            required: true
+				        }
+				        
+				    },
+				   messages:{
+					   nome: "nome obbligatorio",
+					   cognome:"cognome obbligatorio",
+					   username:"user obbligatorio"
+					  				  
+				   },
+				   submitHandler: function(form){
+					   form.submit();
+				    }
+				});
+				});
+				</script>
+			
 		</form>
 		
     </div><!-- /.container -->
 
-
+<%@ include file="../footer.jsp" %>
 
 </body>
 </html>

@@ -41,7 +41,7 @@
 			 	</div>
   			</div>
 		         <div class="col-sm-4">
-		          <button type="submit" class="btn btn-primary btn-md">Shop</button>
+		          <button type="submit" class="btn btn-success btn-md">Shop</button>
 		    	<a class="btn btn-secondary" href="${pageContext.request.contextPath}/tavolo/funzioni.jsp">Back</a>
 		    	</div>
 		   	</form>

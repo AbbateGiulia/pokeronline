@@ -5,6 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Ricerca</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon" />
@@ -93,14 +94,14 @@
   				
   			<div class="form-group">        
 		      <div class="col-sm-offset-2 col-sm-10">
-		        <button type="submit" class="btn btn-primary btn-md">Effetua Ricerca</button>
+		        <button type="submit" class="btn btn-success btn-md">Effetua Ricerca</button>
 		      </div>
 		    </div>
 		</form>
 		
     </div><!-- /.container -->
 
-
+<%@ include file="../footer.jsp" %>
 
 </body>
 </html>

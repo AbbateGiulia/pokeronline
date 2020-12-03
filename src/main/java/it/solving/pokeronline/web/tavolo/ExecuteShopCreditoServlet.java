@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -72,6 +73,12 @@ public class ExecuteShopCreditoServlet extends HttpServlet {
 		 creditoUtente+=Integer.parseInt(credito);
 		 utente.setCreditoAccumulato(creditoUtente);
 		 utenteService.aggiorna(utente);
+		 //aggiorno utente in sessione
+		 HttpSession session = request.getSession();
+		Utente user = (Utente) session.getAttribute("userInfo");
+		user.setCreditoAccumulato(creditoUtente);
+		utenteService.aggiorna(user);
+		 
 		 request.setAttribute("successMessage", "Aggiunto credito + " + credito + " con successo!");
 		 request.getRequestDispatcher("/tavolo/credito.jsp").forward(request, response);;		
 		

@@ -47,6 +47,8 @@ public class ExecuteLasciaTavoloServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utente user = (Utente) session.getAttribute("userInfo");
 		user.setTavolo(null);
+		user.setEsperienzaAccumulata(user.getEsperienzaAccumulata()+1);
+		utenteService.aggiorna(user);
 		request.setAttribute("successMessage", "Operazione effettuata correttamente");
 		request.getRequestDispatcher("/tavolo/funzioni.jsp").forward(request, response);
 	}

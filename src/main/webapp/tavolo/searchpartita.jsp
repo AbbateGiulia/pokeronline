@@ -84,7 +84,7 @@
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary btn-md">Effettua
+					<button type="submit" class="btn btn-success btn-md">Effettua
 						Inserimento</button>
 				</div>
 			</div>
@@ -166,7 +166,7 @@
 	</div>
 	<!-- /.container -->
 
-
+<%@ include file="../footer.jsp" %>
 
 </body>
 

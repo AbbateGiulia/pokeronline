@@ -33,7 +33,7 @@
  			<div class="col-sm-6 text-center">
 				<div class="jumbotron jumbotron-fluid">
 					 <h1 class="display-8">Gestione Tavolo</h1>
-				       <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/special/PrepareSearchTavoloServlet" role="button">Vai alla Gestione &raquo;</a></p>
+				       <p><a class="btn btn-success btn-lg" href="${pageContext.request.contextPath}/special/PrepareSearchTavoloServlet" role="button">Vai alla Gestione &raquo;</a></p>
 		        	  
 			     </div>
 		    </div>
@@ -43,7 +43,7 @@
 	      <div class="col-sm-6 text-center">
 		    <div class="jumbotron jumbotron-fluid">			
 			        <h1 class="display-8">Play Management</h1>
-			        <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/PrepareFunzioniTavoloServlet" role="button">Vai al Gioco &raquo;</a></p> 
+			        <p><a class="btn btn-success btn-lg" href="${pageContext.request.contextPath}/PrepareFunzioniTavoloServlet" role="button">Vai al Gioco &raquo;</a></p> 
 		    </div>
     	  </div>
     
@@ -51,7 +51,7 @@
 	     <div class="col-sm-6 text-center">
 	    	<div class="jumbotron jumbotron-fluid">	    		
 			        <h1 class="display-8">Gestione Amministrazione</h1>
-			        <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/users/PrepareSearchUtenteServlet" role="button">Vai alla Gestione &raquo;</a></p>	     		      
+			        <p><a class="btn btn-success btn-lg" href="${pageContext.request.contextPath}/users/PrepareSearchUtenteServlet" role="button">Vai alla Gestione &raquo;</a></p>	     		      
 	    	</div>
 	     </div>
     </c:if>

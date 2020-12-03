@@ -49,7 +49,7 @@
 						<td>												
 							<a
 							href="${pageContext.request.contextPath}/PrepareGiocaTavoloServlet?idTavolo=${tavoloItem.id }"
-							class="btn btn-info">Gioca</a>					
+							class="btn btn-outline-success">Gioca</a>					
 						</td>
 					</tr>
 				</c:forEach>			
@@ -59,5 +59,7 @@
 			</table>
 
 	</div>
+	
+	<%@ include file="../footer.jsp" %>
 </body>
 </html>

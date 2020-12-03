@@ -49,13 +49,13 @@
 						<td>
 							<a
 							href="${pageContext.request.contextPath}/special/ExecuteVisualizzaTavoloServlet?idTavolo=${tavoloItem.id }"
-							class="btn btn-info">Dettaglio</a> 
+							class="btn btn-outline-success">Dettaglio</a> 
 							<a
 							href="${pageContext.request.contextPath}/special/PrepareUpdateTavoloServlet?idTavolo=${tavoloItem.id }"
-							class="btn btn-info">Modifica</a>
+							class="btn btn-outline-success">Modifica</a>
 							<a
 							href="${pageContext.request.contextPath}/special/PrepareDeleteTavoloServlet?idTavolo=${tavoloItem.id }"
-							class="btn btn-info">Elimina</a>
+							class="btn btn-outline-success">Elimina</a>
 						</td>
 					</tr>
 				</c:forEach>			
@@ -65,5 +65,7 @@
 			</table>
 
 	</div>
+	
+	<%@ include file="../footer.jsp" %>
 </body>
 </html>

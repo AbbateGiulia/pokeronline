@@ -48,7 +48,7 @@
 				
   			</div>
 		         <div class="col-sm-4">
-		          <button type="submit" class="btn btn-primary btn-md">Gioca</button>
+		          <button type="submit" class="btn btn-success btn-md">Gioca</button>
 		    	<a class="btn btn-secondary" href="${pageContext.request.contextPath}/ExecuteLasciaTavoloServlet">Lascia</a>
 		    	</div>
 		   	</form>

@@ -1,9 +1,10 @@
+ <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!-- Bootstrap -->
 <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
 
 
 <!-- Static navbar -->
-<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #e3f2fd; margin-bottom:2rem">
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #aeffb1; margin-bottom:2rem">
 	<a class="navbar-brand" href="${pageContext.request.contextPath}/home.jsp">Poker Online</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
@@ -29,9 +30,11 @@
 				</div></li>
 		</ul>
 		 <ul class="nav navbar-nav navbar-right">
+		 <c:if test="${userInfo != null}">
             <li><p class="navbar-text">Utente: ${userInfo.username }(${userInfo.nome } ${userInfo.cognome })
             <a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a></p> 
             </li>
+            </c:if>
           </ul>
 	</div>
 </nav>

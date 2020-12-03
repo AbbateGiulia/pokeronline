@@ -57,7 +57,7 @@ public class PrepareUpdateTavoloServlet extends HttpServlet {
 			caricaSingoloTavoloEager(Long.parseLong(idTavolo));
 		 
 		if(tavoloDettaglio.getGiocatori().size() > 0) {
-			request.setAttribute("errorMessage", "non puoi cancellare tavolo con giocatori");
+			request.setAttribute("errorMessage", "non puoi modificare tavolo con giocatori");
 			Utente utente= (Utente) request.getSession().getAttribute("userInfo");		
 			Long id =utente.getId();
 			request.setAttribute("listaTavoliAttribute", tavoloService.listAllTavoloUtente(id));

@@ -63,6 +63,7 @@ public class ExecuteUpdateTavoloServlet extends HttpServlet {
 		tavoloDTO.setCreditoMinimo(puntataMinima);
 		tavoloDTO.setDenominazione(denominazioneInput);
 		tavoloDTO.setEsperienzaMinima(esperienzaMinimaInput);
+		tavoloDTO.setId(Long.parseLong(idTavolo));
 		
 		List<String> tavoloErrors = tavoloDTO.errors();
 		if (!tavoloErrors.isEmpty()) {
@@ -91,6 +92,7 @@ public class ExecuteUpdateTavoloServlet extends HttpServlet {
 		
 		
 		//vado in pagina con ok
+		 
 		request.setAttribute("messaggioConferma", "aggiornamento effettuato con successo!");
 		request.setAttribute("listaTavoliAttribute", tavoloService.listAllTavoloUtente(id));
 		request.getRequestDispatcher("/tavolo/results.jsp").forward(request, response);

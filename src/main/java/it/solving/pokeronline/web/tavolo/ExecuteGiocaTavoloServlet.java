@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -57,10 +58,10 @@ public class ExecuteGiocaTavoloServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String tavoloId = request.getParameter("idTavolo");
-		String utenteId = request.getParameter("idUtente");
+		String tavoloId = request.getParameter("idTavolo");		
 		
-		Utente utenteInGioco =utenteService.caricaSingoloUtente(Long.parseLong(utenteId));
+		 HttpSession session = request.getSession();
+		Utente utenteInGioco = (Utente) session.getAttribute("userInfo");		
 		Tavolo tavolo=tavoloService.caricaSingoloTavolo(Long.parseLong(tavoloId));
 		utenteInGioco.setTavolo(tavolo);
 		

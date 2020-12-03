@@ -55,7 +55,7 @@
 		</div>
 			
 			
-		  <img class="mb-4" src="${pageContext.request.contextPath}/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+		  <img class="mb-4" src="${pageContext.request.contextPath}/assets/brand/chip.png" alt="" width="72" height="72">
 		  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 		  <label for="inputUsername" class="sr-only">Username</label>
 		  <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
@@ -64,7 +64,7 @@
 		  <div class="checkbox mb-3">
 		    
 		  </div>
-		  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		  <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
 		  
 		  <div class = "col-sm">
 		      <p> Non sei registrato?</p>
