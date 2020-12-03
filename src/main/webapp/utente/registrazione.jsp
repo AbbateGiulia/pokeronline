@@ -15,8 +15,21 @@
 	 <style type="text/css">
     	body {
 		  padding-top: 0;
+		}
+		.footer{
+		position: relative;
 		}	
     </style>
+    
+    
+    <style type="text/css">
+			.error {
+			  color: #a94442;
+			  background-color: #f2dede;
+			  border-color: #ebccd1;
+			  padding:1px 20px 1px 20px;
+			}
+	</style>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon" />
 </head>
 <body>

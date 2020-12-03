@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.solving.pokeronline.model.Tavolo;
+import it.solving.pokeronline.model.Utente;
 import it.solving.pokeronline.service.tavolo.TavoloService;
 import it.solving.pokeronline.util.Util;
 
@@ -53,7 +54,16 @@ public class PrepareUpdateTavoloServlet extends HttpServlet {
 			return;
 		}
 		Tavolo tavoloDettaglio = tavoloService.
-			caricaSingoloTavolo(Long.parseLong(idTavolo));
+			caricaSingoloTavoloEager(Long.parseLong(idTavolo));
+		 
+		if(tavoloDettaglio.getGiocatori().size() > 0) {
+			request.setAttribute("errorMessage", "non puoi cancellare tavolo con giocatori");
+			Utente utente= (Utente) request.getSession().getAttribute("userInfo");		
+			Long id =utente.getId();
+			request.setAttribute("listaTavoliAttribute", tavoloService.listAllTavoloUtente(id));
+			request.getRequestDispatcher("/tavolo/results.jsp").forward(request, response);
+			return;
+		}
 		
 		request.setAttribute("tavoloAttribute", tavoloDettaglio);
 		request.getRequestDispatcher("/tavolo/update.jsp").forward(request, response);

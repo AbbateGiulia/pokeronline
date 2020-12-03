@@ -33,7 +33,7 @@
 	   
       	<form class="form-horizontal" action="${pageContext.request.contextPath}/special/ExecuteInsertTavoloServlet" method="post">
       	
-      	<input class="form-control" type="text" id="userId" name="userId" value="${tavolo.idCreatore}" >
+      	<input class="form-control" type="hidden" id="userId" name="userId" value="${tavolo.idCreatore}" >
       	
       		<div class="form-group">
       			<label class="control-label col-sm-2" for="denominazione">Denominazione:</label>

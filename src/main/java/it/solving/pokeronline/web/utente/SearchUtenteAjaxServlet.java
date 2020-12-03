@@ -45,7 +45,7 @@ public class SearchUtenteAjaxServlet extends HttpServlet {
 
 		String term = request.getParameter("term"); // data term sulla funzione ajax
 		String filter = request.getParameter("filter");
-		if (filter == "1") {
+		if (filter.equals("uno")) {
 			List<Utente> listaUtenti = utenteService.cercaByUsernameILike(term);
 			String json = buildJsonResponse(listaUtenti);
 			response.getWriter().write(json);

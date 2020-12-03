@@ -63,10 +63,20 @@ public class ExecuteRegistrazioneUtenteServlet extends HttpServlet {
 		String usernameInput= request.getParameter("username");
 		String passwordInput = request.getParameter("password");
 		
+		
 		//dto di controllo
 		UtenteDTO utenteDTO = new UtenteDTO(nomeInput, cognomeInput, usernameInput, passwordInput);
 		
 		List<String> utenteErrors = utenteDTO.errors();
+		for (Utente utente: utenteService.listAllUtenti()) {
+			if(utente.getUsername().equals(usernameInput)) {
+				utenteErrors.add("username non disponibile");
+				request.setAttribute("utenteAttribute", utenteDTO);
+				request.setAttribute("utenteErrors", utenteErrors);
+				request.getRequestDispatcher("/utente/registrazione.jsp").forward(request, response);
+				return;
+			}
+		}
 		if (!utenteErrors.isEmpty()) {
 			
 			request.setAttribute("utenteAttribute", utenteDTO);

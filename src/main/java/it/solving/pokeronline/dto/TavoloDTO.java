@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
+
 
 import it.solving.pokeronline.model.Tavolo;
 import it.solving.pokeronline.util.Util;
@@ -121,6 +121,23 @@ public class TavoloDTO {
 			result.add("campo credito inferiore a zero");
 		if (!Util.isNumber(this.idCreatore))
 			result.add("user creatore non valido");
+		if (!Util.isEmptyOrNull(this.dataCreazione)) {
+			try {
+				Date dataParse = new SimpleDateFormat("dd-mm-yyyy").parse(getDataCreazione());
+			} catch (ParseException e) {
+				result.add("data non valida");
+			}
+		}
+
+		return result;
+	}
+	
+	public List<String> errorsSearchPartita() {
+		List<String> result = new ArrayList<String>();
+		if (!StringUtils.isBlank(this.creditoMinimo) && !Util.isNumber(this.creditoMinimo))
+			result.add("campo credito deve essere un numero");
+		if (!StringUtils.isBlank(this.creditoMinimo) && Integer.parseInt(this.creditoMinimo) < 0)
+			result.add("campo credito inferiore a zero");
 		if (!Util.isEmptyOrNull(this.dataCreazione)) {
 			try {
 				Date dataParse = new SimpleDateFormat("dd-mm-yyyy").parse(getDataCreazione());

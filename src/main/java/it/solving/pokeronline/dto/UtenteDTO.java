@@ -206,6 +206,9 @@ public class UtenteDTO {
 			if (!Util.isEmptyOrNull(utenteDTO.getCognome())) {
 			result.setCognome(utenteDTO.getCognome());
 			}
+			if (!Util.isEmptyOrNull(utenteDTO.getPassword())) {
+				result.setPassword(utenteDTO.getPassword());
+				}
 			if (!Util.isEmptyOrNull(utenteDTO.getUsername())) {
 			result.setUsername(utenteDTO.getUsername());
 			}

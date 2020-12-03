@@ -71,4 +71,22 @@ public class TavoloServiceImpl implements TavoloService {
 		return (Tavolo) tavoloRepository.getTavoloEager(id);
 	}
 
+	@Override
+	public List<Tavolo> findByExamplePartita(Tavolo example) {
+		String query = "select distinct t from Tavolo t join fetch t.utenteCreatore c left join t.giocatori g where 1=1";		
+		if ((example.getDataCreazione())!= null)
+			query += " and t.dataCreazione = '" + example.getDataCreazione()+ "'";
+		if (example.getCreditoMinimo() != null && example.getCreditoMinimo() > 0)
+			query += " and t.creditoMinimo >= " + example.getCreditoMinimo();
+		if (example.getEsperienzaMinima() != null && example.getEsperienzaMinima() >= 0)
+			query += " and t.esperienzaMinima <= " + example.getEsperienzaMinima();
+		if (example.getUtenteCreatore() != null)
+			query += " and c.id = '" + example.getUtenteCreatore().getId() + "' ";
+		if (example.getGiocatori().size() > 0)
+			query += " and g.id = '" + example.getGiocatori().iterator().next().getId() + "' ";
+		
+
+		return entityManager.createQuery(query, Tavolo.class).getResultList();
+	}
+
 }
