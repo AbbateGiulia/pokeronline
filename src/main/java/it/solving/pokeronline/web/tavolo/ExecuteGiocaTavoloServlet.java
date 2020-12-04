@@ -24,11 +24,10 @@ import it.solving.pokeronline.service.utente.UtenteService;
 @WebServlet("/ExecuteGiocaTavoloServlet")
 public class ExecuteGiocaTavoloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 
 	@Autowired
 	private TavoloService tavoloService;
-	
+
 	@Autowired
 	private UtenteService utenteService;
 
@@ -37,61 +36,64 @@ public class ExecuteGiocaTavoloServlet extends HttpServlet {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ExecuteGiocaTavoloServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ExecuteGiocaTavoloServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String tavoloId = request.getParameter("idTavolo");
-		
-		 //lavoro su utente in sessione e non su db (aggiornamneto diretto)
-		 HttpSession session = request.getSession();
+
+		// lavoro su utente in sessione e non su db (aggiornamneto diretto)
+		HttpSession session = request.getSession();
 		Utente utenteInGioco = (Utente) session.getAttribute("userInfo");
-		
-		Tavolo tavolo=tavoloService.caricaSingoloTavolo(Long.parseLong(tavoloId));
+
+		Tavolo tavolo = tavoloService.caricaSingoloTavolo(Long.parseLong(tavoloId));
 		utenteInGioco.setTavolo(tavolo);
-		
-		//gestione caso credito insufficiente
-		if(tavolo.getCreditoMinimo() > utenteInGioco.getCreditoAccumulato()) {
+
+		// gestione caso credito insufficiente
+		if (tavolo.getCreditoMinimo() > utenteInGioco.getCreditoAccumulato()) {
 			request.setAttribute("errorMessage", "non raggiugni la puntata minima per partecipare!");
 			request.setAttribute("tavoloAttribute", tavolo);
 			request.setAttribute("utenteAttribute", utenteInGioco);
 			request.getRequestDispatcher("/tavolo/gioca.jsp").forward(request, response);
 			return;
 		}
-		
-		//blocco svolgimento partita
+
+		// blocco svolgimento partita
 		double segno = Math.random();
-		//se segno >=0.5 segno positivo, negativo altrimenti.
-		if(segno >=0.5) {
+		// se segno >=0.5 segno positivo, negativo altrimenti.
+		if (segno >= 0.5) {
 			segno = 1;
-		}else {
+		} else {
 			segno = -1;
 		}
-		Integer somma=(int)(Math.random()*1000);
-		Integer tot = (int) segno*somma;
-		
-		
+		Integer somma = (int) (Math.random() * 1000);
+		Integer tot = (int) segno * somma;
+
 		Integer credito = utenteInGioco.getCreditoAccumulato();
 		credito += tot;
-		//gestione caso credito terminato a partita iniziata
-		if(credito < 0) {
+		// gestione caso credito terminato a partita iniziata
+		if (credito < 0) {
 			utenteInGioco.setCreditoAccumulato(0);
 			utenteService.aggiorna(utenteInGioco);
 			request.setAttribute("errorMessage", "hai terminato il credito!");
@@ -100,22 +102,19 @@ public class ExecuteGiocaTavoloServlet extends HttpServlet {
 			request.getRequestDispatcher("/tavolo/gioca.jsp").forward(request, response);
 			return;
 		}
-		
+
 		utenteInGioco.setCreditoAccumulato(credito);
 		utenteService.aggiorna(utenteInGioco);
-		
-		//alert guadargno/perdita
-		if(tot>=0) {
+
+		// alert guadargno/perdita
+		if (tot >= 0) {
 			request.setAttribute("risultatoPositivo", "Hai vinto " + tot + "euro");
-		}else {
+		} else {
 			request.setAttribute("risultatoNegativo", "Hai perso " + tot + "euro");
 		}
 		request.setAttribute("tavoloAttribute", tavolo);
 		request.setAttribute("utenteAttribute", utenteInGioco);
 		request.getRequestDispatcher("/tavolo/gioca.jsp").forward(request, response);
-		
-		
-		
 
 	}
 

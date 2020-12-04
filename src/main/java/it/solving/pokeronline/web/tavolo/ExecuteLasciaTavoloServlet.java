@@ -22,7 +22,7 @@ import it.solving.pokeronline.service.utente.UtenteService;
 @WebServlet("/ExecuteLasciaTavoloServlet")
 public class ExecuteLasciaTavoloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Autowired
 	private UtenteService utenteService;
 
@@ -31,33 +31,37 @@ public class ExecuteLasciaTavoloServlet extends HttpServlet {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ExecuteLasciaTavoloServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ExecuteLasciaTavoloServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Utente user = (Utente) session.getAttribute("userInfo");
-		//uscita dal tavolo e ++ exp
+		// uscita dal tavolo e ++ exp
 		user.setTavolo(null);
-		user.setEsperienzaAccumulata(user.getEsperienzaAccumulata()+1);
+		user.setEsperienzaAccumulata(user.getEsperienzaAccumulata() + 1);
 		utenteService.aggiorna(user);
 		request.setAttribute("successMessage", "Operazione effettuata correttamente");
 		request.getRequestDispatcher("/tavolo/funzioni.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

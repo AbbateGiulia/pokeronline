@@ -24,13 +24,12 @@ import it.solving.pokeronline.util.Util;
 @WebServlet("/users/PrepareUpdateUtenteServlet")
 public class PrepareUpdateUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Autowired
 	private UtenteService utenteService;
-	
+
 	@Autowired
 	private RuoloService ruoloService;
-
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -54,8 +53,8 @@ public class PrepareUpdateUtenteServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String idUtente = request.getParameter("idUtente");
-		
-		//controllo input da url
+
+		// controllo input da url
 		if (Util.isEmptyOrNull(idUtente) || !Util.isNumber(idUtente)) {
 			RequestDispatcher rd = request.getRequestDispatcher("/LogoutServlet");
 			rd.forward(request, response);
@@ -65,7 +64,7 @@ public class PrepareUpdateUtenteServlet extends HttpServlet {
 		request.setAttribute("listaRuoli", ruoloService.listAllRuolo());
 		request.setAttribute("utenteAttribute", utenteUpdate);
 		request.getRequestDispatcher("/utente/update.jsp").forward(request, response);
-		;
+
 	}
 
 	/**

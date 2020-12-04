@@ -93,7 +93,6 @@ public class ExecuteUpdateUtenteServlet extends HttpServlet {
 		// se arrivo qui significa che va bene ma controllo ruoli
 		Set<Ruolo> setRuoliUpdate = new HashSet<Ruolo>();
 		Utente utenteUpdate = utenteService.caricaSingoloUtente(Long.parseLong(idInputParam));
-		
 		for (String s : request.getParameterValues("ruolo")) {
 			Ruolo ruoloInsert = null;
 			try {
@@ -108,11 +107,13 @@ public class ExecuteUpdateUtenteServlet extends HttpServlet {
 			setRuoliUpdate.add(ruoloInsert);
 		}
 
-		// costruzione oggetto valido
+		// costruzione oggetto valido spostata in service
 		utenteUpdate.setRuoli(setRuoliUpdate);
 		utenteUpdate.setNome(nomeInput);
 		utenteUpdate.setCognome(cognomeInput);
 		utenteUpdate.setUsername(usernameInput);
+
+		utenteUpdate.setRuoli(setRuoliUpdate);
 
 		utenteService.aggiorna(utenteUpdate);
 

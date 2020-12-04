@@ -36,6 +36,14 @@
 	        font-size: 3.5rem;
 	      }
 	    }
+	    
+			.error {
+			  color: #a94442;
+			  background-color: #f2dede;
+			  border-color: #ebccd1;
+			  padding:1px 20px 1px 20px;
+			}
+	
 	  </style>
 	  
 	  <!-- Custom styles for this template -->
@@ -43,7 +51,7 @@
 	</head>
 	<body class="text-center">
 		
-	   	<form class="form-signin" action="${pageContext.request.contextPath}/LoginServlet" method="post">
+	   	<form class="form-signin" action="${pageContext.request.contextPath}/LoginServlet" id="form" method="post" >
 	   	
 		   	<div class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}" role="alert">
 			  ${errorMessage}
@@ -58,9 +66,9 @@
 		  <img class="mb-4" src="${pageContext.request.contextPath}/assets/brand/chip.png" alt="" width="72" height="72">
 		  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 		  <label for="inputUsername" class="sr-only">Username</label>
-		  <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+		  <input type="text" id="username" name="username" class="form-control" placeholder="Username" >
 		  <label for="inputPassword" class="sr-only">Password</label>
-		  <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+		  <input type="password" id="password" name="password" class="form-control" placeholder="Password">
 		  <div class="checkbox mb-3">
 		    
 		  </div>
@@ -72,6 +80,34 @@
 		 </div>
 		 
 		  <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+		  
+		<script src="${pageContext.request.contextPath}/assets/js/jquery-1.10.2.min.js"></script>
+		<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+		<script>
+			$(document).ready(function () {
+
+				$("#form").validate({
+				    rules: {
+				        password: {					        	
+				            required: true
+				        },
+				        username: {   
+				            required: true
+				        }
+				        
+				    },
+				   messages:{
+					   password:"cognome obbligatorio",
+					   username:"user obbligatorio"
+					  				  
+				   },
+				   submitHandler: function(form){
+					   form.submit();
+				    }
+				});
+				});
+				</script>
+			
 		</form>
 	</body>
 </html>

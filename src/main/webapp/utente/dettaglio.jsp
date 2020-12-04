@@ -51,9 +51,12 @@
 		    	
 		    	<dl class="row">
 				  <dt class="col-sm-3 text-right">Ruolo:</dt>
-				  <c:forEach items="${utente.ruoli}" var="ruolo">
-				  <dd class="col-sm-9"><c:out value="${ruolo.descrizione}"/></dd>
-				  </c:forEach>
+				 
+				  <dd class="col-sm-9">
+				  	<c:forEach items="${utente.ruoli}" var="ruolo">
+				  		<c:out value="${ruolo.descrizione}"/>
+				  	</c:forEach>
+				  </dd>
 		    	</dl>
 		    	
 	    		    			    	

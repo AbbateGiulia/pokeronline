@@ -14,14 +14,12 @@ import it.solving.pokeronline.repository.tavolo.TavoloRepository;
 
 @Component
 public class TavoloServiceImpl implements TavoloService {
-	
+
 	@Autowired
 	private TavoloRepository tavoloRepository;
-	
+
 	@PersistenceContext
 	private EntityManager entityManager;
-
-	
 
 	@Transactional(readOnly = true)
 	public List<Tavolo> listAllTavolo() {
@@ -30,12 +28,13 @@ public class TavoloServiceImpl implements TavoloService {
 
 	@Transactional(readOnly = true)
 	public Tavolo caricaSingoloTavolo(Long id) {
-		return (Tavolo) tavoloRepository.findById(id).orElse(null);		}
+		return (Tavolo) tavoloRepository.findById(id).orElse(null);
+	}
 
 	@Transactional
 	public void aggiorna(Tavolo tavoloInstance) {
-		//sposto logica update
-		Tavolo tavoloUpdate = caricaSingoloTavolo(tavoloInstance.getId());	
+		// sposto logica update
+		Tavolo tavoloUpdate = caricaSingoloTavolo(tavoloInstance.getId());
 		tavoloInstance.setDataCreazione(tavoloUpdate.getDataCreazione());
 		tavoloRepository.save(tavoloInstance);
 	}
@@ -52,11 +51,12 @@ public class TavoloServiceImpl implements TavoloService {
 
 	@Override
 	public List<Tavolo> findByExample(Tavolo example) {
-		String query = "select t from Tavolo t join t.utenteCreatore c where c.id="+ example.getUtenteCreatore().getId();		
+		String query = "select t from Tavolo t join t.utenteCreatore c where c.id="
+				+ example.getUtenteCreatore().getId();
 		if (StringUtils.isNotEmpty(example.getDenominazione()))
 			query += " and t.denominazione like '%" + example.getDenominazione() + "%' ";
-		if ((example.getDataCreazione())!= null)
-			query += " and t.dataCreazione = '" + example.getDataCreazione()+ "'";
+		if ((example.getDataCreazione()) != null)
+			query += " and t.dataCreazione = '" + example.getDataCreazione() + "'";
 		if (example.getCreditoMinimo() != null && example.getCreditoMinimo() > 0)
 			query += " and t.creditoMinimo = " + example.getCreditoMinimo();
 
@@ -65,7 +65,7 @@ public class TavoloServiceImpl implements TavoloService {
 
 	@Override
 	public List<Tavolo> listAllTavoloUtente(Long id) {
-		 return tavoloRepository.findAllTavoloByUtenteCreatore_id(id);
+		return tavoloRepository.findAllTavoloByUtenteCreatore_id(id);
 	}
 
 	@Override
@@ -75,9 +75,9 @@ public class TavoloServiceImpl implements TavoloService {
 
 	@Override
 	public List<Tavolo> findByExamplePartita(Tavolo example) {
-		String query = "select distinct t from Tavolo t join fetch t.utenteCreatore c left join t.giocatori g where 1=1";		
-		if ((example.getDataCreazione())!= null)
-			query += " and t.dataCreazione = '" + example.getDataCreazione()+ "'";
+		String query = "select distinct t from Tavolo t join fetch t.utenteCreatore c left join t.giocatori g where 1=1";
+		if ((example.getDataCreazione()) != null)
+			query += " and t.dataCreazione = '" + example.getDataCreazione() + "'";
 		if (example.getCreditoMinimo() != null && example.getCreditoMinimo() > 0)
 			query += " and t.creditoMinimo >= " + example.getCreditoMinimo();
 		if (example.getEsperienzaMinima() != null && example.getEsperienzaMinima() >= 0)
@@ -86,7 +86,6 @@ public class TavoloServiceImpl implements TavoloService {
 			query += " and c.id = '" + example.getUtenteCreatore().getId() + "' ";
 		if (example.getGiocatori().size() > 0)
 			query += " and g.id = '" + example.getGiocatori().iterator().next().getId() + "' ";
-		
 
 		return entityManager.createQuery(query, Tavolo.class).getResultList();
 	}

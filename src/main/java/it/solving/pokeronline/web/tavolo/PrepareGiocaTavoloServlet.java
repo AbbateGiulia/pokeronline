@@ -17,7 +17,6 @@ import it.solving.pokeronline.model.Tavolo;
 import it.solving.pokeronline.model.Utente;
 import it.solving.pokeronline.service.tavolo.TavoloService;
 
-
 /**
  * Servlet implementation class PrepareGiocaTavoloServlet
  */
@@ -49,26 +48,26 @@ public class PrepareGiocaTavoloServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String tavoloId = request.getParameter("idTavolo");
-		//carico tavolo
+		// carico tavolo
 		Tavolo tavoloGioco = tavoloService.caricaSingoloTavolo(Long.parseLong(tavoloId));
-		//utente in sessione
+		// utente in sessione
 		HttpSession session = request.getSession();
 		Utente user = (Utente) session.getAttribute("userInfo");
-		//controllo sul credito disponibile
-		if (user.getCreditoAccumulato() < tavoloGioco.getCreditoMinimo() ) {
+		// controllo sul credito disponibile
+		if (user.getCreditoAccumulato() < tavoloGioco.getCreditoMinimo()) {
 			request.setAttribute("listaTavoliAttribute", tavoloService.listAllTavolo());
 			request.setAttribute("errorMessage", "credito insufficiente per partecipare alla partita selezionata");
 			request.getRequestDispatcher("/tavolo/listapartite.jsp").forward(request, response);
 			return;
 		}
-		//controllo su esperienza 
+		// controllo su esperienza
 		if (user.getEsperienzaAccumulata() < tavoloGioco.getEsperienzaMinima()) {
 			request.setAttribute("listaTavoliAttribute", tavoloService.listAllTavolo());
 			request.setAttribute("errorMessage", "esperienza insufficiente per partecipare alla partita selezionata");
 			request.getRequestDispatcher("/tavolo/listapartite.jsp").forward(request, response);
 			return;
 		}
-		
+
 		request.setAttribute("utenteAttribute", user);
 		request.setAttribute("tavoloAttribute", tavoloGioco);
 		request.getRequestDispatcher("/tavolo/gioca.jsp").forward(request, response);

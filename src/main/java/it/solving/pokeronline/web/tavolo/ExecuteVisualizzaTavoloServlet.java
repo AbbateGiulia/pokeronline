@@ -17,57 +17,58 @@ import it.solving.pokeronline.model.Tavolo;
 import it.solving.pokeronline.service.tavolo.TavoloService;
 import it.solving.pokeronline.util.Util;
 
-
-
 /**
  * Servlet implementation class ExecuteVisualizzaTavoloServlet
  */
 @WebServlet("/special/ExecuteVisualizzaTavoloServlet")
 public class ExecuteVisualizzaTavoloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Autowired
 	private TavoloService tavoloService;
-	
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-       
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ExecuteVisualizzaTavoloServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public ExecuteVisualizzaTavoloServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String idTavolo = request.getParameter("idTavolo");
-		
-		//controllo su input non validi  inseriti tramite url
-		if(Util.isEmptyOrNull(idTavolo)|| !Util.isNumber(idTavolo)) {
+
+		// controllo su input non validi inseriti tramite url
+		if (Util.isEmptyOrNull(idTavolo) || !Util.isNumber(idTavolo)) {
 			RequestDispatcher rd = request.getRequestDispatcher("/LogoutServlet");
 			rd.forward(request, response);
 			return;
 		}
-		Tavolo tavoloDettaglio = tavoloService.
-			caricaSingoloTavolo(Long.parseLong(idTavolo));
-		
+		Tavolo tavoloDettaglio = tavoloService.caricaSingoloTavolo(Long.parseLong(idTavolo));
+
 		request.setAttribute("tavoloAttribute", tavoloDettaglio);
-		request.getRequestDispatcher("/tavolo/dettaglio.jsp").forward(request, response);;
+		request.getRequestDispatcher("/tavolo/dettaglio.jsp").forward(request, response);
+		;
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

@@ -17,8 +17,6 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import it.solving.pokeronline.model.Utente;
 import it.solving.pokeronline.service.utente.UtenteService;
 
-
-
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -42,24 +40,24 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String usernameInput = request.getParameter("username");
 		String passwordInput = request.getParameter("password");
-		
+
 		Utente utenteCheAccede = utenteService.eseguiAccesso(usernameInput, passwordInput);
-		
-		//se non trovo nulla non deve essere possibile accedere
-		if(utenteCheAccede == null) {
+
+		// se non trovo nulla non deve essere possibile accedere
+		if (utenteCheAccede == null) {
 			request.setAttribute("errorMessage", "Utente non abilitato");
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 			rd.forward(request, response);
 			return;
 		}
-		
-		//metto utente in sessione
-		HttpSession session =  request.getSession();
+
+		// metto utente in sessione
+		HttpSession session = request.getSession();
 		session.setAttribute("userInfo", utenteCheAccede);
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 		rd.forward(request, response);
 	}

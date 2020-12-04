@@ -1,6 +1,5 @@
 package it.solving.pokeronline.web.utente;
 
-
 import java.io.IOException;
 import java.util.List;
 
@@ -45,12 +44,12 @@ public class SearchUtenteAjaxServlet extends HttpServlet {
 
 		String term = request.getParameter("term"); // data term sulla funzione ajax
 		String filter = request.getParameter("filter"); // in base al parametro carico liste diverse
-		//list all utenti like term
+		// list all utenti like term
 		if (filter.equals("1")) {
 			List<Utente> listaUtenti = utenteService.cercaByUsernameILike(term);
 			String json = buildJsonResponse(listaUtenti);
 			response.getWriter().write(json);
-		//lista all utenti like term e con ruolo special
+			// lista all utenti like term e con ruolo special
 		} else {
 			List<Utente> listaSpecial = utenteService.listAllUtentiSpecial("Special Player", "Admin", term);
 			String json = buildJsonResponse(listaSpecial);

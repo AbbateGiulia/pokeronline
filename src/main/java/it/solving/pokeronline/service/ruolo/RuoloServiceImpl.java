@@ -11,7 +11,7 @@ import it.solving.pokeronline.repository.ruolo.RuoloRepository;
 
 @Component
 public class RuoloServiceImpl implements RuoloService {
-	
+
 	@Autowired
 	private RuoloRepository ruoloRepository;
 
@@ -28,18 +28,18 @@ public class RuoloServiceImpl implements RuoloService {
 	@Transactional
 	public void aggiorna(Ruolo ruoloInstance) {
 		ruoloRepository.save(ruoloInstance);
-		
+
 	}
 
 	@Transactional
 	public void inserisciNuovo(Ruolo ruoloInstance) {
 		ruoloRepository.save(ruoloInstance);
-		
+
 	}
 
 	@Transactional
 	public void rimuovi(Ruolo ruoloInstance) {
-		ruoloRepository.delete(ruoloInstance);		
+		ruoloRepository.delete(ruoloInstance);
 	}
 
 }

@@ -46,13 +46,13 @@ public class ExecuteDeleteTavoloServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//carico tavolo
+		// carico tavolo
 		String idTavolo = request.getParameter("idTavolo");
 		Tavolo tavoloDelete = tavoloService.caricaSingoloTavolo(Long.parseLong(idTavolo));
 
 		tavoloService.rimuovi(tavoloDelete);
-		
-		//filtro lista result per utente in sessione
+
+		// filtro lista result per utente in sessione
 		Utente utente = (Utente) request.getSession().getAttribute("userInfo");
 		Long id = utente.getId();
 

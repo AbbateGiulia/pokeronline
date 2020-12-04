@@ -24,69 +24,73 @@ import it.solving.pokeronline.service.tavolo.TavoloService;
 @WebServlet("/special/ExecuteUpdateTavoloServlet")
 public class ExecuteUpdateTavoloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Autowired
 	private TavoloService tavoloService;
-	
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ExecuteUpdateTavoloServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ExecuteUpdateTavoloServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String idTavolo = request.getParameter("tavoloId");
-		String denominazioneInput= request.getParameter("denominazione");
-		String esperienzaMinimaInput= request.getParameter("esperienzaMinima");
+		String denominazioneInput = request.getParameter("denominazione");
+		String esperienzaMinimaInput = request.getParameter("esperienzaMinima");
 		String puntataMinima = request.getParameter("puntataMinima");
-		
-		//costruzione DTO
+
+		// costruzione DTO
 		TavoloDTO tavoloDTO = new TavoloDTO();
 		tavoloDTO.setCreditoMinimo(puntataMinima);
 		tavoloDTO.setDenominazione(denominazioneInput);
 		tavoloDTO.setEsperienzaMinima(esperienzaMinimaInput);
 		tavoloDTO.setId(Long.parseLong(idTavolo));
-		
+
 		List<String> tavoloErrors = tavoloDTO.errors();
 		if (!tavoloErrors.isEmpty()) {
-			
+
 			request.setAttribute("tavoloAttribute", tavoloDTO);
 			request.setAttribute("tavoloErrors", tavoloErrors);
 			request.getRequestDispatcher("/tavolo/update.jsp").forward(request, response);
 			return;
 		}
-		
-		//se arrivo qui significa che va bene e converto
+
+		// se arrivo qui significa che va bene e converto
 		Tavolo tavoloInstance = TavoloDTO.buildModelFromDto(tavoloDTO);
-		
+
 		Utente utente = (Utente) request.getSession().getAttribute("userInfo");
 		Long id = utente.getId();
-		 
+
 		tavoloInstance.setId(Long.parseLong(idTavolo));
 		tavoloInstance.setUtenteCreatore(utente);
 		tavoloService.aggiorna(tavoloInstance);
-		 
-		//vado in pagina con ok	 
+
+		// vado in pagina con ok
 		request.setAttribute("messaggioConferma", "aggiornamento effettuato con successo!");
 		request.setAttribute("listaTavoliAttribute", tavoloService.listAllTavoloUtente(id));
 		request.getRequestDispatcher("/tavolo/results.jsp").forward(request, response);

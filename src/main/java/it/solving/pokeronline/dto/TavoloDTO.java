@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-
 import it.solving.pokeronline.model.Tavolo;
 import it.solving.pokeronline.util.Util;
 
@@ -104,9 +103,9 @@ public class TavoloDTO {
 		if (StringUtils.isBlank(this.denominazione))
 			result.add("Il campo DENOMINAZIONE non può essere vuoto");
 		if (!Util.isNumber(this.esperienzaMinima) || StringUtils.isBlank(this.esperienzaMinima))
-			result.add("Il campo esperienza vuoto o non valido");
-		if (!Util.isNumber(this.creditoMinimo)|| StringUtils.isBlank(this.creditoMinimo) )
-			result.add("Il campo credito vuoto o non valido");
+			result.add("Il campo ESPERIENZA vuoto o non valido");
+		if (!Util.isNumber(this.creditoMinimo) || StringUtils.isBlank(this.creditoMinimo))
+			result.add("Il campo CREDITO vuoto o non valido");
 
 		return result;
 	}
@@ -114,35 +113,35 @@ public class TavoloDTO {
 	public List<String> errorsSearch() {
 		List<String> result = new ArrayList<String>();
 		if (!StringUtils.isBlank(this.esperienzaMinima) && !Util.isNumber(this.esperienzaMinima))
-			result.add("campo esperienza deve essere un numero");
+			result.add("Il campo ESPERIENZA deve essere un numero");
 		if (!StringUtils.isBlank(this.creditoMinimo) && !Util.isNumber(this.creditoMinimo))
-			result.add("campo credito deve essere un numero");
+			result.add("Il campo CREDITO deve essere un numero");
 		if (!StringUtils.isBlank(this.creditoMinimo) && Integer.parseInt(this.creditoMinimo) < 0)
-			result.add("campo credito inferiore a zero");
+			result.add("Il campo CREDITO è inferiore a zero");
 		if (!Util.isNumber(this.idCreatore))
-			result.add("user creatore non valido");
+			result.add("Il campo USER non è valido");
 		if (!Util.isEmptyOrNull(this.dataCreazione)) {
 			try {
 				new SimpleDateFormat("dd-mm-yyyy").parse(getDataCreazione());
 			} catch (ParseException e) {
-				result.add("data non valida");
+				result.add("Il campo DATA non è valido");
 			}
 		}
 
 		return result;
 	}
-	
+
 	public List<String> errorsSearchPartita() {
 		List<String> result = new ArrayList<String>();
 		if (!StringUtils.isBlank(this.creditoMinimo) && !Util.isNumber(this.creditoMinimo))
-			result.add("campo credito deve essere un numero");
+			result.add("Il campo CREDITO deve essere un numero");
 		if (!StringUtils.isBlank(this.creditoMinimo) && Integer.parseInt(this.creditoMinimo) < 0)
-			result.add("campo credito inferiore a zero");
+			result.add("Il campo CREDITO è inferiore a zero");
 		if (!Util.isEmptyOrNull(this.dataCreazione)) {
 			try {
 				Date dataParse = new SimpleDateFormat("dd-mm-yyyy").parse(getDataCreazione());
 			} catch (ParseException e) {
-				result.add("data non valida");
+				result.add("Il campo DATA non è valido");
 			}
 		}
 

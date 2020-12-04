@@ -15,13 +15,12 @@ import it.solving.pokeronline.model.StatoUtente;
 import it.solving.pokeronline.model.Utente;
 import it.solving.pokeronline.repository.utente.UtenteRepository;
 
-
 @Component
 public class UtenteServiceImpl implements UtenteService {
-	
+
 	@Autowired
 	private UtenteRepository utenteRepository;
-	
+
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -37,20 +36,19 @@ public class UtenteServiceImpl implements UtenteService {
 
 	@Transactional
 	public void aggiorna(Utente utenteInstance) {
-		 utenteRepository.save(utenteInstance);
-		
+		utenteRepository.save(utenteInstance);
 	}
 
 	@Transactional
 	public void inserisciNuovo(Utente utenteInstance) {
 		utenteRepository.save(utenteInstance);
-		
+
 	}
 
 	@Override
 	public void rimuovi(Utente utenteInstance) {
 		utenteRepository.delete(utenteInstance);
-		
+
 	}
 
 	@Override
@@ -60,15 +58,15 @@ public class UtenteServiceImpl implements UtenteService {
 
 	@Override
 	public List<Utente> findByExample(Utente example) {
-		String query = "select u from Utente u left join fetch u.ruoli r where 1=1";		
+		String query = "select u from Utente u left join fetch u.ruoli r where 1=1";
 		if (StringUtils.isNotEmpty(example.getNome()))
 			query += " and u.nome like '%" + example.getNome() + "%' ";
 		if (StringUtils.isNotEmpty(example.getCognome()))
 			query += " and u.cognome like '%" + example.getCognome() + "%' ";
 		if (StringUtils.isNotEmpty(example.getUsername()))
 			query += " and u.username like '%" + example.getUsername() + "%' ";
-		if ((example.getDataRegistrazione())!= null)
-			query += " and u.dataRegistrazione = '" + example.getDataRegistrazione()+ "'";
+		if ((example.getDataRegistrazione()) != null)
+			query += " and u.dataRegistrazione = '" + example.getDataRegistrazione() + "'";
 		if (example.getStato() != null)
 			query += " and u.stato = '" + example.getStato() + "' ";
 		if (example.getRuoli().size() > 0)
@@ -88,10 +86,8 @@ public class UtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	public List<Utente> cercaByUsernameILike( String term) {
+	public List<Utente> cercaByUsernameILike(String term) {
 		return utenteRepository.findAllByUsernameContaining(term);
 	}
-		
-	}
 
-
+}

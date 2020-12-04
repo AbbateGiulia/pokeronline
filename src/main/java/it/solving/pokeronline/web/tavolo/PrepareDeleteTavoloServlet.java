@@ -24,10 +24,10 @@ import it.solving.pokeronline.util.Util;
 @WebServlet("/special/PrepareDeleteTavoloServlet")
 public class PrepareDeleteTavoloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Autowired
 	private TavoloService tavoloService;
-	
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -50,18 +50,18 @@ public class PrepareDeleteTavoloServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String idTavolo = request.getParameter("idTavolo");
 
-		//controllo input non validi url
+		// controllo input non validi url
 		if (Util.isEmptyOrNull(idTavolo) || !Util.isNumber(idTavolo)) {
 			RequestDispatcher rd = request.getRequestDispatcher("/LogoutServlet");
 			rd.forward(request, response);
 			return;
 		}
-		//impedire delete se il tavolo non è vuoto
+		// impedire delete se il tavolo non è vuoto
 		Tavolo tavoloDettaglio = tavoloService.caricaSingoloTavoloEager(Long.parseLong(idTavolo));
-		if(tavoloDettaglio.getGiocatori().size() > 0) {
+		if (tavoloDettaglio.getGiocatori().size() > 0) {
 			request.setAttribute("errorMessage", "non puoi cancellare tavolo con giocatori");
-			Utente utente= (Utente) request.getSession().getAttribute("userInfo");		
-			Long id =utente.getId();
+			Utente utente = (Utente) request.getSession().getAttribute("userInfo");
+			Long id = utente.getId();
 			request.setAttribute("listaTavoliAttribute", tavoloService.listAllTavoloUtente(id));
 			request.getRequestDispatcher("/tavolo/results.jsp").forward(request, response);
 			return;
@@ -69,9 +69,8 @@ public class PrepareDeleteTavoloServlet extends HttpServlet {
 
 		request.setAttribute("tavoloAttribute", tavoloDettaglio);
 		request.getRequestDispatcher("/tavolo/delete.jsp").forward(request, response);
-		
-	}
 
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
