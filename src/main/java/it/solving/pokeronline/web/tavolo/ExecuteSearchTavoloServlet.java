@@ -76,7 +76,7 @@ public class ExecuteSearchTavoloServlet extends HttpServlet {
 			return;
 		}
 		
-		//se arrivo qui significa che va bene ma controllo municipio
+		//se arrivo qui significa che va bene e converto
 		Tavolo tavoloInstance = TavoloDTO.buildModelFromDto(tavoloDTO);
 		
 		Utente utenteCreatore =utenteService.caricaSingoloUtente(Long.parseLong(idCreatore));

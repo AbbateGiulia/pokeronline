@@ -50,11 +50,13 @@ public class PrepareDeleteTavoloServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String idTavolo = request.getParameter("idTavolo");
 
+		//controllo input non validi url
 		if (Util.isEmptyOrNull(idTavolo) || !Util.isNumber(idTavolo)) {
 			RequestDispatcher rd = request.getRequestDispatcher("/LogoutServlet");
 			rd.forward(request, response);
 			return;
 		}
+		//impedire delete se il tavolo non è vuoto
 		Tavolo tavoloDettaglio = tavoloService.caricaSingoloTavoloEager(Long.parseLong(idTavolo));
 		if(tavoloDettaglio.getGiocatori().size() > 0) {
 			request.setAttribute("errorMessage", "non puoi cancellare tavolo con giocatori");

@@ -48,6 +48,7 @@ public class ExecuteVisualizzaUtenteServlet extends HttpServlet {
 		String idUtente = request.getParameter("idUtente");
 		Utente utenteVisualizza = utenteService.caricaSingoloUtenteEager(Long.parseLong(idUtente));
 		request.setAttribute("utenteAttribute", utenteVisualizza);
+		//utilizzo autocomplete, no set lista ruoli
 		//request.setAttribute("listaRuoli", utenteVisualizza.getRuoli());
 		request.getRequestDispatcher("/utente/dettaglio.jsp").forward(request, response);
 	}

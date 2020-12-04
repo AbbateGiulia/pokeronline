@@ -61,6 +61,7 @@ public class PrepareGiocaTavoloServlet extends HttpServlet {
 			request.getRequestDispatcher("/tavolo/listapartite.jsp").forward(request, response);
 			return;
 		}
+		//controllo su esperienza 
 		if (user.getEsperienzaAccumulata() < tavoloGioco.getEsperienzaMinima()) {
 			request.setAttribute("listaTavoliAttribute", tavoloService.listAllTavolo());
 			request.setAttribute("errorMessage", "esperienza insufficiente per partecipare alla partita selezionata");

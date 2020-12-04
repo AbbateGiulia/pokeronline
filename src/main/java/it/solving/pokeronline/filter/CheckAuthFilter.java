@@ -15,10 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import it.solving.pokeronline.model.Utente;
 
 
-
-
-
-
 @WebFilter(filterName = "CheckAuthFilter", urlPatterns = { "/*" })
 public class CheckAuthFilter implements Filter {
 

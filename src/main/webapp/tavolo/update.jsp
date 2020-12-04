@@ -79,11 +79,13 @@
 				        },
 				        puntataMinima: {					        	
 				            required: true,
-				            number: true
+				            number: true,
+				            min: 1
 				        },
 				        esperienzaMinima: {   				        	
 				            required: true,
-				            number: true
+				            number: true,
+				            min: 1
 				        }
 				        
 				    },

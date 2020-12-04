@@ -19,52 +19,48 @@ import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
 
-
-
-
 @Entity
 @Table(name = "utente")
 public class Utente {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+
 	@Column(name = "id")
 	private Long id;
-	
+
 	@Column(name = "username")
 	private String username;
-	
+
 	@Column(name = "password")
 	private String password;
-	
+
 	@Column(name = "nome")
 	private String nome;
-	
+
 	@Column(name = "cognome")
 	private String cognome;
-	
+
 	@Column(name = "data_registrazione")
 	private LocalDate dataRegistrazione;
-	
-	@Column(name= "esperienza_accumulata")
+
+	@Column(name = "esperienza_accumulata")
 	private Integer esperienzaAccumulata = 0;
-	
-	@Column(name= "credito_accumulato")
+
+	@Column(name = "credito_accumulato")
 	private Integer creditoAccumulato = 0;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "tavolo_id")
 	private Tavolo tavolo;
-	
+
 	// se non uso questa annotation viene gestito come un intero
-		@Enumerated(EnumType.STRING)
-		private StatoUtente stato;
-		
+	@Enumerated(EnumType.STRING)
+	private StatoUtente stato;
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "utente_ruolo", joinColumns = @JoinColumn(name = "utente_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ruolo_id", referencedColumnName = "ID"))
 	private Set<Ruolo> ruoli = new HashSet<>(0);
-	
 
 	public Tavolo getTavolo() {
 		return tavolo;
@@ -93,8 +89,6 @@ public class Utente {
 		this.nome = nome;
 		this.cognome = cognome;
 	}
-	
-	
 
 	public Long getId() {
 		return id;
@@ -174,7 +168,8 @@ public class Utente {
 				+ ", cognome=" + cognome + ", dataRegistrazione=" + dataRegistrazione + ", esperienzaAccumulata="
 				+ esperienzaAccumulata + ", creditoAccumulato=" + creditoAccumulato + ", stato=" + stato + "]";
 	}
-	
+
+	// metodo utilizzato nel filtro o per nascondere funzionalità su jsp
 	public boolean isAdmin() {
 		for (Ruolo ruoloItem : ruoli) {
 			if (ruoloItem.getCodice().equals(CodiceRuolo.ADMIN_ROLE))
@@ -182,7 +177,7 @@ public class Utente {
 		}
 		return false;
 	}
-	
+
 	public boolean isSpecial() {
 		for (Ruolo ruoloItem : ruoli) {
 			if (ruoloItem.getCodice().equals(CodiceRuolo.SPECIAL_PLAYER_ROLE))
@@ -190,5 +185,5 @@ public class Utente {
 		}
 		return false;
 	}
-		
+
 }

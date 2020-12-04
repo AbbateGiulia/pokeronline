@@ -85,7 +85,7 @@ public class ExecuteRegistrazioneUtenteServlet extends HttpServlet {
 			return;
 		}
 		
-		//se arrivo qui significa che va bene ma controllo municipio
+		//se arrivo qui significa che va bene e converto
 				Utente utenteInstance = UtenteDTO.buildModelFromDto(utenteDTO);
 				utenteInstance.setStato(StatoUtente.CREATO);
 				utenteInstance.setDataRegistrazione(LocalDate.now());

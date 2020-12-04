@@ -83,8 +83,8 @@ public class UtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	public List<Utente> listAllUtentiSpecial(String descrizione, String term) {
-		return utenteRepository.listAllSpecialPlayer(descrizione, term);
+	public List<Utente> listAllUtentiSpecial(String descrizione, String descrizione2, String term) {
+		return utenteRepository.listAllSpecialPlayer(descrizione, descrizione2, term);
 	}
 
 	@Override

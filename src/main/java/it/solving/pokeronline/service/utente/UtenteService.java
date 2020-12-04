@@ -12,7 +12,7 @@ public interface UtenteService {
 	
 	public List<Utente> cercaByUsernameILike( String term);
 	
-	public List<Utente> listAllUtentiSpecial(String descrizione, String term);
+	public List<Utente> listAllUtentiSpecial(String descrizione, String descrizione2, String term);
 
 	public Utente caricaSingoloUtente(Long id);
 	

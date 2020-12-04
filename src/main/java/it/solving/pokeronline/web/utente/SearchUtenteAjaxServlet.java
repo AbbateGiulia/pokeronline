@@ -44,13 +44,15 @@ public class SearchUtenteAjaxServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 
 		String term = request.getParameter("term"); // data term sulla funzione ajax
-		String filter = request.getParameter("filter");
-		if (filter.equals("uno")) {
+		String filter = request.getParameter("filter"); // in base al parametro carico liste diverse
+		//list all utenti like term
+		if (filter.equals("1")) {
 			List<Utente> listaUtenti = utenteService.cercaByUsernameILike(term);
 			String json = buildJsonResponse(listaUtenti);
 			response.getWriter().write(json);
+		//lista all utenti like term e con ruolo special
 		} else {
-			List<Utente> listaSpecial = utenteService.listAllUtentiSpecial("Special Player", term);
+			List<Utente> listaSpecial = utenteService.listAllUtentiSpecial("Special Player", "Admin", term);
 			String json = buildJsonResponse(listaSpecial);
 			response.getWriter().write(json);
 		}

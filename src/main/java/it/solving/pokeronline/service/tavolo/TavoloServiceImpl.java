@@ -34,8 +34,10 @@ public class TavoloServiceImpl implements TavoloService {
 
 	@Transactional
 	public void aggiorna(Tavolo tavoloInstance) {
+		//sposto logica update
+		Tavolo tavoloUpdate = caricaSingoloTavolo(tavoloInstance.getId());	
+		tavoloInstance.setDataCreazione(tavoloUpdate.getDataCreazione());
 		tavoloRepository.save(tavoloInstance);
-		
 	}
 
 	@Transactional

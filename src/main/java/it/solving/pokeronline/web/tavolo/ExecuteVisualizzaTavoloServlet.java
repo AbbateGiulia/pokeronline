@@ -48,8 +48,10 @@ public class ExecuteVisualizzaTavoloServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-String idTavolo = request.getParameter("idTavolo");
 		
+		String idTavolo = request.getParameter("idTavolo");
+		
+		//controllo su input non validi  inseriti tramite url
 		if(Util.isEmptyOrNull(idTavolo)|| !Util.isNumber(idTavolo)) {
 			RequestDispatcher rd = request.getRequestDispatcher("/LogoutServlet");
 			rd.forward(request, response);

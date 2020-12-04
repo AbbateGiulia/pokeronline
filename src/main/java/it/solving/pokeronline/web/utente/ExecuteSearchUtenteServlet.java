@@ -93,8 +93,10 @@ public class ExecuteSearchUtenteServlet extends HttpServlet {
 			return;
 		}
 
-		// se arrivo qui significa che va bene ma controllo
+		// se arrivo qui significa che va bene e converto
 		Utente utenteInstance = UtenteDTO.buildModelFromDto(utenteDTO);
+		
+		//setto dipendenze solo se inserite in input
 		if (!Util.isEmptyOrNull(statoInput)) {
 			utenteInstance.setStato(Enum.valueOf(StatoUtente.class, statoInput));
 		}

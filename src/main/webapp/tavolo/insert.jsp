@@ -41,7 +41,7 @@
 	   
       	<form class="form-horizontal" action="${pageContext.request.contextPath}/special/ExecuteInsertTavoloServlet" method="post" id="form">
       	
-      	<input class="form-control" type="text" id="userId" name="userId" value="${tavolo.idCreatore}" >
+      	<input class="form-control" type="hidden" id="userId" name="userId" value="${tavolo.idCreatore}" >
       	
       		<div class="form-group">
       			<label class="control-label col-sm-2" for="denominazione">Denominazione:</label>
@@ -79,11 +79,13 @@
 				        },
 				        puntataMinima: {					        	
 				            required: true,
-				            number: true
+				            number: true,
+				            min: 1
 				        },
 				        esperienzaMinima: {   				        	
 				            required: true,
-				            number: true
+				            number: true,
+				            min: 1
 				        }
 				        
 				    },

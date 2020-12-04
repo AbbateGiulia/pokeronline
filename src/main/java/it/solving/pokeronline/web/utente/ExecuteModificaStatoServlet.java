@@ -47,6 +47,7 @@ public class ExecuteModificaStatoServlet extends HttpServlet {
 		String idUtente= request.getParameter("idUtente");
 		Utente utente= utenteService.caricaSingoloUtente(Long.parseLong(idUtente));
 		
+		//impedire attivazione utenti senza ruoli
 		if(utente.getRuoli().size()==0) {
 			request.setAttribute("errorMessage","Impossibile attivare utente senza ruolo");
 			request.setAttribute("listaUtentiAttribute", utenteService.listAllUtenti());
@@ -54,6 +55,7 @@ public class ExecuteModificaStatoServlet extends HttpServlet {
 			return;
 		}
 		
+		//disattiva
 		if(utente.getStato().equals(StatoUtente.ATTIVO)) {
 			utente.setStato(StatoUtente.DISABILITATO);
 			utente.setTavolo(null);
@@ -63,7 +65,7 @@ public class ExecuteModificaStatoServlet extends HttpServlet {
 			return;
 		}
 		
-
+		//attiva
 		if(utente.getStato().equals(StatoUtente.DISABILITATO) || utente.getStato().equals(StatoUtente.CREATO)) {
 			utente.setStato(StatoUtente.ATTIVO);
 			utenteService.aggiorna(utente);

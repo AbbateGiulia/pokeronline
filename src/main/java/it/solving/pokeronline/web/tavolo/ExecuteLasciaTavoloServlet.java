@@ -46,6 +46,7 @@ public class ExecuteLasciaTavoloServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Utente user = (Utente) session.getAttribute("userInfo");
+		//uscita dal tavolo e ++ exp
 		user.setTavolo(null);
 		user.setEsperienzaAccumulata(user.getEsperienzaAccumulata()+1);
 		utenteService.aggiorna(user);

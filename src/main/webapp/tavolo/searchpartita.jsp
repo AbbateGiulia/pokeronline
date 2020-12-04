@@ -36,15 +36,15 @@
 		<div class="page-header">
 			<h3>Cerca partita</h3>
 		</div>
-		
-		<%-- alert con lista errori --%>
-	<div class="alert alert-danger ${not empty partitaErrors?'':'d-none' }" role="alert">
-		<c:forEach var = "errorItem" items="${partitaErrors }">
-        	<ul>
-				<li> ${errorItem }</li>	
-			</ul>
-      	</c:forEach>
-	</div>
+			
+			<%-- alert con lista errori --%>
+		<div class="alert alert-danger ${not empty partitaErrors?'':'d-none' }" role="alert">
+			<c:forEach var = "errorItem" items="${partitaErrors }">
+	        	<ul>
+					<li> ${errorItem }</li>	
+				</ul>
+	      	</c:forEach>
+		</div>
 
 		<form class="form-horizontal" action="${pageContext.request.contextPath}/ExecuteSearchPartitaServlet"
 			method="post" id="form">
@@ -94,7 +94,7 @@
 				$( "#utenteInputId" ).autocomplete({
 					 source: function(request, response) {
 					        $.ajax({
-					            url: "SearchUtenteAjaxServlet?filter=uno",
+					            url: "SearchUtenteAjaxServlet?filter=1",
 					            datatype: "json",
 					            data: {
 					                term: request.term,   
@@ -129,7 +129,7 @@
 				$( "#creatoreInputId" ).autocomplete({
 					 source: function(request, response) {
 					        $.ajax({
-					            url: "SearchUtenteAjaxServlet?filter=due",
+					            url: "SearchUtenteAjaxServlet?filter=2",
 					            datatype: "json",
 					            data: {
 					                term: request.term,   

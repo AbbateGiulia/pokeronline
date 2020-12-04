@@ -87,7 +87,8 @@ public class ExecuteSearchPartitaServlet extends HttpServlet {
 		}
 
 		Tavolo tavoloSearch = TavoloDTO.buildModelFromDto(tavoloDTO);
-
+		
+		//setto dipendenze(?) solo se presenti
 		if (!Util.isEmptyOrNull(idCreatore)) {
 			Utente creatore = utenteService.caricaSingoloUtenteEager(Long.parseLong(idCreatore));
 			tavoloSearch.setUtenteCreatore(creatore);

@@ -48,6 +48,7 @@ public class PrepareUpdateTavoloServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idTavolo = request.getParameter("idTavolo");
 		
+		//controllo id valido in input da url
 		if(Util.isEmptyOrNull(idTavolo)|| !Util.isNumber(idTavolo)) {
 			RequestDispatcher rd = request.getRequestDispatcher("/LogoutServlet");
 			rd.forward(request, response);
@@ -56,6 +57,7 @@ public class PrepareUpdateTavoloServlet extends HttpServlet {
 		Tavolo tavoloDettaglio = tavoloService.
 			caricaSingoloTavoloEager(Long.parseLong(idTavolo));
 		 
+		//impedire update per tavoli non vuoti
 		if(tavoloDettaglio.getGiocatori().size() > 0) {
 			request.setAttribute("errorMessage", "non puoi modificare tavolo con giocatori");
 			Utente utente= (Utente) request.getSession().getAttribute("userInfo");		

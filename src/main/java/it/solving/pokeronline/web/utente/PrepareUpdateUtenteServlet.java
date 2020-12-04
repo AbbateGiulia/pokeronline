@@ -54,7 +54,8 @@ public class PrepareUpdateUtenteServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String idUtente = request.getParameter("idUtente");
-
+		
+		//controllo input da url
 		if (Util.isEmptyOrNull(idUtente) || !Util.isNumber(idUtente)) {
 			RequestDispatcher rd = request.getRequestDispatcher("/LogoutServlet");
 			rd.forward(request, response);

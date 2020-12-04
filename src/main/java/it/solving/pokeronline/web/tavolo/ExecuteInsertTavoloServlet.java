@@ -76,7 +76,7 @@ public class ExecuteInsertTavoloServlet extends HttpServlet {
 			return;
 		}
 		
-		//se arrivo qui significa che va bene ma controllo municipio
+		//se arrivo qui significa che va bene e converto
 		Tavolo tavoloInstance = TavoloDTO.buildModelFromDto(tavoloDTO);
 		tavoloInstance.setDataCreazione(LocalDate.now());
 		

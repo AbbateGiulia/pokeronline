@@ -54,11 +54,13 @@ public class ExecuteUpdateTavoloServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String idTavolo = request.getParameter("tavoloId");
 		String denominazioneInput= request.getParameter("denominazione");
 		String esperienzaMinimaInput= request.getParameter("esperienzaMinima");
 		String puntataMinima = request.getParameter("puntataMinima");
 		
+		//costruzione DTO
 		TavoloDTO tavoloDTO = new TavoloDTO();
 		tavoloDTO.setCreditoMinimo(puntataMinima);
 		tavoloDTO.setDenominazione(denominazioneInput);
@@ -74,25 +76,17 @@ public class ExecuteUpdateTavoloServlet extends HttpServlet {
 			return;
 		}
 		
-		//se arrivo qui significa che va bene ma controllo municipio
+		//se arrivo qui significa che va bene e converto
 		Tavolo tavoloInstance = TavoloDTO.buildModelFromDto(tavoloDTO);
 		
-		Utente utente= (Utente) request.getSession().getAttribute("userInfo");
-		
-		Long id =utente.getId();
+		Utente utente = (Utente) request.getSession().getAttribute("userInfo");
+		Long id = utente.getId();
 		 
+		tavoloInstance.setId(Long.parseLong(idTavolo));
+		tavoloInstance.setUtenteCreatore(utente);
+		tavoloService.aggiorna(tavoloInstance);
 		 
-		 tavoloInstance.setId(Long.parseLong(idTavolo));
-		 Tavolo tavoloUpdate =tavoloService.caricaSingoloTavolo(Long.parseLong(idTavolo));
-		 tavoloInstance.setUtenteCreatore(utente);
-		 tavoloInstance.setDataCreazione(tavoloUpdate.getDataCreazione());
-		 
-		 tavoloService.aggiorna(tavoloInstance);
-		 
-		
-		
-		//vado in pagina con ok
-		 
+		//vado in pagina con ok	 
 		request.setAttribute("messaggioConferma", "aggiornamento effettuato con successo!");
 		request.setAttribute("listaTavoliAttribute", tavoloService.listAllTavoloUtente(id));
 		request.getRequestDispatcher("/tavolo/results.jsp").forward(request, response);

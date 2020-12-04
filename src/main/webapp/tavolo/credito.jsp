@@ -15,36 +15,34 @@
 
 	<div class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}" role="alert">
 			  ${errorMessage}
-			</div>
+	</div>
 			
 			<div class="alert alert-success ${successMessage!=null?'':'d-none' }" role="alert">
 			${successMessage}
-		</div>
+			</div>
 			
 		<div class='card'>
-		<c:set var= "utente" value="${sessionScope.userInfo}"/>
-		    <div class='card-header'>
+			<c:set var= "utente" value="${sessionScope.userInfo}"/>
+		    	<div class='card-header'>
 		    
-		    
-		    
-		        <h5>Acquista credito</h5> 
-		    </div>
+		        	<h5>Acquista credito</h5> 
+		    	</div>
 		    	
 		    <div class='card-body'>
-		    <form class="form-horizontal" action="${pageContext.request.contextPath}/ExecuteShopCreditoServlet" method="post">
-		     <div class="form-group">
-		     
-		     <input class="form-control" type="hidden" id="idUtente" name="idUtente" value="${utente.id}">
-      			
-	    		<div class="col-sm-4">
-					<input class="form-control" type="number" id="credito" name="credito" value="${requestScope.credito}">
-			 	</div>
-  			</div>
-		         <div class="col-sm-4">
-		          <button type="submit" class="btn btn-success btn-md">Shop</button>
-		    	<a class="btn btn-secondary" href="${pageContext.request.contextPath}/tavolo/funzioni.jsp">Back</a>
-		    	</div>
-		   	</form>
+		    	<form class="form-horizontal" action="${pageContext.request.contextPath}/ExecuteShopCreditoServlet" method="post">
+		    	
+		     		<div class="form-group">		     
+		     			<input class="form-control" type="hidden" id="idUtente" name="idUtente" value="${utente.id}">	
+			    		<div class="col-sm-4">
+							<input class="form-control" type="number" id="credito" name="credito" value="${requestScope.credito}">
+					 	</div>
+  					</div>
+  					
+			         <div class="col-sm-4">
+			          	<button type="submit" class="btn btn-success btn-md">Shop</button>
+			    		<a class="btn btn-secondary" href="${pageContext.request.contextPath}/tavolo/funzioni.jsp">Back</a>
+			    	</div>
+		   		</form>
 		    </div>
 		    
 		</div>	

@@ -102,11 +102,11 @@ public class TavoloDTO {
 	public List<String> errors() {
 		List<String> result = new ArrayList<String>();
 		if (StringUtils.isBlank(this.denominazione))
-			result.add("Il campo denominazione non può essere vuoto");
+			result.add("Il campo DENOMINAZIONE non può essere vuoto");
 		if (!Util.isNumber(this.esperienzaMinima) || StringUtils.isBlank(this.esperienzaMinima))
-			result.add("campo esperienza vuoto o non valido");
+			result.add("Il campo esperienza vuoto o non valido");
 		if (!Util.isNumber(this.creditoMinimo)|| StringUtils.isBlank(this.creditoMinimo) )
-			result.add("campo credito vuoto o non valido");
+			result.add("Il campo credito vuoto o non valido");
 
 		return result;
 	}
@@ -123,7 +123,7 @@ public class TavoloDTO {
 			result.add("user creatore non valido");
 		if (!Util.isEmptyOrNull(this.dataCreazione)) {
 			try {
-				Date dataParse = new SimpleDateFormat("dd-mm-yyyy").parse(getDataCreazione());
+				new SimpleDateFormat("dd-mm-yyyy").parse(getDataCreazione());
 			} catch (ParseException e) {
 				result.add("data non valida");
 			}
